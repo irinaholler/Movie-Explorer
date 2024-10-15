@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --md-dark-color: #1d1d1d;
+    --dark-color: #171717;
+    --light-dark-color: #292929;
+    --yellow-color: #d4aa11;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+
+  @media (min-width: 481px) and (max-width: 767px) {
+    font-size: 1.2rem;
+  }
+}
+
+body {
+  background-color: var(--md-dark-color);
+  background-image: url('./img/TMDB.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20%;
+}
+
+header {
+  position: sticky; /* Makes the header stick at the top */
+  top: 0;           /* Aligns it to the top */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--md-dark-color);
+  z-index: 10;      /* Ensures the header stays on top of other content */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+}
+
+.logo{
+  padding: 1rem 0;
+  border-bottom: 1px solid #90cea1;
+}
+
+.logo p {
+  font-size: 2rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.logo p span{
+  color: #90cea1;
+}
+
+@media only screen and (max-width: 480px) {
+  .logo {
+    width: 90%;
+  }
+}
+
+#search-form {
+  position: relative; /* Make this relative to ensure absolute children position correctly */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+@media (max-width: 905px) {
+  .search-bar {
+    width: 70%; /* Adjusts to 70% for screens smaller than 905px */
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .search-bar {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-bar {
+    width: 100%;
+  }
+}
+
+#search {
+  width: 100%;
+  max-width: 800px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  background-color: transparent;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 600;
+  outline: none;
+}
+
+#search::placeholder {
+  font-size: 1.1rem;
+  color: #22cba8;
+}
+
+#search:focus {
+  outline: none;
+}
+
+/* Autocomplete Suggestions Container */
+#autocomplete-suggestions {
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 250px;
+  overflow-y: auto;
+  width: 100%; /* Full width of the input */
+  z-index: 1000;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  top: 100%; /* Position directly below the input */
+  left: 0; /* Align with the left edge of the input */
+}
+
+/* Individual Suggestion Items */
+#autocomplete-suggestions div {
+  padding: 12px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover Effect for Suggestion Items */
+#autocomplete-suggestions div:hover {
+  background-color: #f9f9f9;
+  transform: scale(1.02);
+}
+
+/* Styling the Last Suggestion with No Border */
+#autocomplete-suggestions div:last-child {
+  border-bottom: none;
+}
+
+/* Smooth scrolling inside the suggestion box */
+#autocomplete-suggestions::-webkit-scrollbar {
+  width: 8px;
+}
+
+#autocomplete-suggestions::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+#autocomplete-suggestions::-webkit-scrollbar-track {
+  background-color: #f9f9f9;
+}
+
+/* Mobile-friendly touch adjustments */
+@media (max-width: 600px) {
+  #autocomplete-suggestions div {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+#error-message {
+  padding: 5px 8px;
+  background-color: red;
+  color: #171717;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fade-in 1s ease-in;
+}
+
+@keyframes fade-in {
+  0% {
+    /* Effect values */
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}
+
+#movies-container, #favorites-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.movie-card  {
+  width: 400px;
+  margin: 1rem;
+  padding: 0 0 20px 0;
+  background-color: #90cea1;
+  box-shadow: 0 4px 5px rgb(0, 0, 0, 0.2);
+  border-radius: 15px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  height: auto; /* Allow height to be dynamic based on content */
+  overflow: hidden; /* Hide any overflow content */
+}
+
+.movie-card img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-card:hover {
+  transform: translateY(-10px);
+}
+
+.movie-card h3 {
+  padding: 20px 0;
+  font-size: 1.4rem;
+  color: var(--md-dark-color);
+  margin-bottom: 10px;
+}
+
+.movie-card h4 {
+  padding: 10px;
+  font-size: 1.2rem;
+  color: var(--md-dark-color);
+}
+
+.movie-card p {
+  padding: 10px 20px 30px;
+  font-size: 1rem;
+  color: var(--md-dark-color);
+}
+
+#clear-input {
+  color: #90cea1; /* Change color to your liking */
+  font-size: 20px; /* Adjust size */
+}
+
+#clear-input:hover {
+  color: #5d926b; /* Change color on hover */
+}
+
+/* Add Favorites */
+
+.Favorites {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid #90cea1;
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#favorites-container p {
+  color: #90cea1;
+}
+
+/* Hide the heart icon by default */
+.favorite-icon {
+  color: red; /* Change color as desired */
+  font-size: 1.5em; /* Adjust size as needed */
+  margin-left: 5px; /* Add spacing if necessary */
+  vertical-align: middle; 
+}
+
+/* Show the icon on hover */
+.add-favorite:hover {
+  display: inline; /* Show the icon when hovering over the add-favorite span */
+  color: #ff0202;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.remove-favorite {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.remove-favorite:hover {
+  background-color: #e63946; /* Darker red on hover */
+}
